@@ -84,4 +84,24 @@ export class HashMap {
 
     return false;
   }
+
+  remove(key) {
+    const hashedKey = this.hash(key);
+    const bucket = this.buckets[hashedKey];
+
+    let current = bucket.head;
+    let index = 0;
+
+    while (current !== null) {
+      if (current.value.key === key) {
+        bucket.removeAt(index);
+        this.loadLevel--;
+        return true;
+      }
+      current = current.nextNode;
+      index++;
+    }
+
+    return false;
+  }
 }
