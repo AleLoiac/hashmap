@@ -64,14 +64,6 @@ export class HashMap {
         const hashedKey = this.hash(element.key);
         const bucket = this.buckets[hashedKey];
 
-        while (tmp !== null) {
-          if (tmp.value.key === key) {
-            tmp.value.value = value;
-            return;
-          }
-          tmp = tmp.nextNode;
-        }
-
         bucket.append(element);
         this.loadLevel++;
       }
