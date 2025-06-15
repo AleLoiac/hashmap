@@ -131,4 +131,20 @@ export class HashMap {
 
     return arrayOfKeys;
   }
+
+  values() {
+    const arrayOfValues = [];
+
+    for (let i = 0; i < this.capacity; i++) {
+      const bucket = this.buckets[i];
+      let tmp = bucket.head;
+
+      while (tmp !== null) {
+        arrayOfValues.push(tmp.value.value);
+        tmp = tmp.nextNode;
+      }
+    }
+
+    return arrayOfValues;
+  }
 }
