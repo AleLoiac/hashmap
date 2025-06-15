@@ -48,9 +48,34 @@ export class HashMap {
     bucket.append(element);
     this.loadLevel++;
 
-    // check loadLevel vs loadFactor/capacity
-    // if bigger -> double array
-    // hash again all keys
+    if (this.loadLevel > this.capacity * this.loadFactor) {
+      const entries = this.entries();
+
+      this.clear();
+      this.capacity *= 2;
+      this.buckets = new Array(this.capacity);
+
+      for (let i = 0; i < this.buckets.length; i++) {
+        this.buckets[i] = new LinkedList();
+      }
+
+      for (const entry of entries) {
+        const element = { key: entry[0], value: entry[1] };
+        const hashedKey = this.hash(element.key);
+        const bucket = this.buckets[hashedKey];
+
+        while (tmp !== null) {
+          if (tmp.value.key === key) {
+            tmp.value.value = value;
+            return;
+          }
+          tmp = tmp.nextNode;
+        }
+
+        bucket.append(element);
+        this.loadLevel++;
+      }
+    }
   }
 
   get(key) {
