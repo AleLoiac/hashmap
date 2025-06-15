@@ -68,4 +68,20 @@ export class HashMap {
 
     return null;
   }
+
+  has(key) {
+    const hashedKey = this.hash(key);
+    const bucket = this.buckets[hashedKey];
+
+    let tmp = bucket.head;
+
+    while (tmp !== null) {
+      if (tmp.value.key === key) {
+        return true;
+      }
+      tmp = tmp.nextNode;
+    }
+
+    return false;
+  }
 }
