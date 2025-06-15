@@ -115,4 +115,20 @@ export class HashMap {
     }
     this.loadLevel = 0;
   }
+
+  keys() {
+    const arrayOfKeys = [];
+
+    for (let i = 0; i < this.capacity; i++) {
+      const bucket = this.buckets[i];
+      let tmp = bucket.head;
+
+      while (tmp !== null) {
+        arrayOfKeys.push(tmp.value.key);
+        tmp = tmp.nextNode;
+      }
+    }
+
+    return arrayOfKeys;
+  }
 }
