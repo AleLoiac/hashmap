@@ -104,4 +104,15 @@ export class HashMap {
 
     return false;
   }
+
+  length() {
+    return this.loadLevel;
+  }
+
+  clear() {
+    for (let i = 0; i < this.capacity; i++) {
+      this.buckets[i].head = null;
+    }
+    this.loadLevel = 0;
+  }
 }
