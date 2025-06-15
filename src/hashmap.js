@@ -52,4 +52,20 @@ export class HashMap {
     // if bigger -> double array
     // hash again all keys
   }
+
+  get(key) {
+    const hashedKey = this.hash(key);
+    const bucket = this.buckets[hashedKey];
+
+    let tmp = bucket.head;
+
+    while (tmp !== null) {
+      if (tmp.value.key === key) {
+        return tmp.value.value;
+      }
+      tmp = tmp.nextNode;
+    }
+
+    return null;
+  }
 }
